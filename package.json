@@ -1,0 +1,30 @@
+{
+  "name": "student-management-system",
+  "version": "1.0.0",
+  "description": "StudentHub – Full Stack Student Management System for Auspify Technologies Internship Task 2",
+  "scripts": {
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "seed": "cd server && npm run seed",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "install:all": "npm run install:server && npm run install:client",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [
+    "student-management-system",
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "mongoose",
+    "vite",
+    "tailwind",
+    "auspify-technologies",
+    "internship-task-2"
+  ],
+  "author": "Yallari Gavada",
+  "license": "ISC"
+}
