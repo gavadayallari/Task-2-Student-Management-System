@@ -1,6 +1,20 @@
 // API Service layer for StudentHub
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+/**
+ * Dynamically resolves the API base URL.
+ * Automatically normalizes the URL to ensure the `/api` prefix is present,
+ * even if VITE_API_URL or VITE_API_BASE_URL is set to the host root (e.g. "http://localhost:5000" or "https://api.example.com").
+ */
+const getBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL;
+  if (!envUrl) {
+    return '/api';
+  }
+  const cleanUrl = envUrl.replace(/\/+$/, '');
+  return cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
+};
+
+const API_BASE_URL = getBaseUrl();
 
 /**
  * Helper to handle fetch responses and error extraction

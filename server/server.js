@@ -30,8 +30,8 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
 
-// Health Check Endpoint
-app.get('/api/health', (req, res) => {
+// Health Check Endpoint (supports both /api/health and /health)
+const healthHandler = (req, res) => {
   const dbState = mongoose.connection.readyState;
   const states = ['Disconnected', 'Connected', 'Connecting', 'Disconnecting'];
   
@@ -45,11 +45,17 @@ app.get('/api/health', (req, res) => {
       isConnected: dbState === 1,
     },
   });
-});
+};
 
-// API Routes
+app.get('/api/health', healthHandler);
+app.get('/health', healthHandler);
+
+// API Routes (supports both /api/... and direct /... endpoints)
 app.use('/api/students', studentRoutes);
+app.use('/students', studentRoutes);
+
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/dashboard', dashboardRoutes);
 
 // Root route
 app.get('/', (req, res) => {
