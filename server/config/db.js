@@ -11,6 +11,7 @@ const connectDB = async () => {
     mongoUri = mongoUri.replace(/^["']|["']$/g, '').trim();
 
     const conn = await mongoose.connect(mongoUri, {
+      dbName: 'studentdb',
       serverSelectionTimeoutMS: 5000,
     });
 

@@ -43,6 +43,7 @@ const healthHandler = (req, res) => {
     database: {
       status: states[dbState] || 'Unknown',
       isConnected: dbState === 1,
+      name: mongoose.connection.name,
     },
   });
 };
