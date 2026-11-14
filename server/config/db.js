@@ -2,8 +2,14 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/studenthub';
+    let mongoUri = (process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/studenthub').trim();
     
+    // Auto-clean if accidentally pasted with "MONGODB_URI=" prefix or wrapped in quotes
+    if (mongoUri.startsWith('MONGODB_URI=')) {
+      mongoUri = mongoUri.replace(/^MONGODB_URI=/, '').trim();
+    }
+    mongoUri = mongoUri.replace(/^["']|["']$/g, '').trim();
+
     const conn = await mongoose.connect(mongoUri, {
       serverSelectionTimeoutMS: 5000,
     });
